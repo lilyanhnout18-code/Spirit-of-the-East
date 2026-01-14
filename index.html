@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>روح الشرق – معهد تعليم</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Arial;
+      background:#f8f5ef;
+      color:#3b2a18;
+    }
+
+    nav{
+      position:sticky;
+      top:0;
+      background:#fffaf0cc;
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid #e6d5b8;
+      z-index:10;
+    }
+
+    nav .container{
+      max-width:1100px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 16px;
+    }
+
+    nav a{
+      color:#3b2a18;
+      text-decoration:none;
+      font-weight:800;
+      margin:0 10px;
+    }
+
+    nav a:hover{color:#c8743c}
+
+    header{
+      padding:70px 18px;
+      text-align:center;
+      background:linear-gradient(135deg,#7a5a36,#9b7a55);
+      color:#fff;
+    }
+
+    header img{
+      height:160px;
+      max-width:90%;
+      margin-bottom:20px;
+    }
+
+    header h1{
+      margin:0;
+      font-size:44px;
+    }
+
+    header p{
+      margin:14px 0 0;
+      font-size:18px;
+      opacity:.95;
+    }
+
+    .bar{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      text-decoration:none;
+      font-weight:900;
+      border-radius:14px;
+      padding:12px 18px;
+      display:inline-block;
+    }
+
+    .btn.primary{
+      background:#f4c98a;
+      color:#3b2a18;
+    }
+
+    .btn.secondary{
+      border:2px solid #f4c98a;
+      color:#fff;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:auto;
+      padding:24px 16px;
+    }
+
+    section{
+      background:#ffffff;
+      border-radius:20px;
+      padding:26px;
+      margin:22px 0;
+      box-shadow:0 12px 28px rgba(0,0,0,.08);
+    }
+
+    h2{
+      margin-top:0;
+      color:#6b4f2f;
+    }
+
+    p{line-height:1.9}
+
+    /* ===== دورات مميزة ===== */
+    .courses-box{
+      background:#f6e2c3;
+      border-radius:20px;
+      padding:26px;
+      margin:22px 0;
+    }
+
+    .courses-title{
+      text-align:center;
+      font-size:28px;
+      margin-bottom:20px;
+      color:#6b4f2f;
+      font-weight:900;
+    }
+
+    .courses-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+      gap:14px;
+    }
+
+    .course-pill{
+      background:#c8743c;
+      color:#fff;
+      padding:12px 10px;
+      border-radius:14px;
+      text-align:center;
+      font-weight:800;
+      font-size:15px;
+      border:none;
+      cursor:pointer;
+    }
+
+    .course-pill.light{
+      background:#f4c98a;
+      color:#3b2a18;
+    }
+
+    .course-pill:active{transform:scale(.98);}
+
+    /* ===== تواصل ===== */
+    .contact{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+
+    @media(min-width:800px){
+      .contact{grid-template-columns:1.2fr .8fr}
+    }
+
+    input,textarea{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid #e6d5b8;
+      font-family:inherit;
+      box-sizing:border-box;
+    }
+
+    button{
+      border:none;
+      background:#c8743c;
+      color:#fff;
+      font-weight:900;
+      padding:12px 18px;
+      border-radius:14px;
+      cursor:pointer;
+    }
+
+    footer{
+      text-align:center;
+      color:#7a5a36;
+      padding:20px;
+    }
+
+    /* ===== Popup (Modal) ===== */
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:999;
+    }
+
+    .modal{
+      width:min(760px, 100%);
+      background:#fff;
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 18px 40px rgba(0,0,0,.25);
+      text-align:right;
+      max-height:90vh;
+      overflow:auto;
+    }
+
+    .modal h3{
+      margin:0 0 8px;
+      color:#6b4f2f;
+    }
+
+    .modal p{
+      margin:0 0 14px;
+      line-height:1.9;
+      color:#3b2a18;
+    }
+
+    .modal-actions{
+      display:flex;
+      gap:10px;
+      justify-content:flex-start;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .modal-close{
+      background:#f4c98a;
+      color:#3b2a18;
+      border:none;
+      border-radius:12px;
+      padding:10px 14px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .modal-whatsapp{
+      background:#c8743c;
+      color:#fff;
+      border:none;
+      border-radius:12px;
+      padding:10px 14px;
+      font-weight:900;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-block;
+    }
+
+    /* ===== Slider داخل Popup للموسيقى ===== */
+    .music-slider{
+      position:relative;
+      overflow:hidden;
+      border-radius:16px;
+      background:#000;
+      margin-top:12px;
+    }
+
+    .music-slides{
+      display:flex;
+      transition:transform .5s ease;
+    }
+
+    .music-slide{
+      min-width:100%;
+      background:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .music-slide img,
+    .music-slide video{
+      width:100%;
+      height:380px;
+      object-fit:contain;
+      display:block;
+      background:#000;
+    }
+
+    .music-btn{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      background:rgba(0,0,0,.55);
+      color:#fff;
+      border:none;
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:22px;
+      font-weight:900;
+    }
+
+    .music-btn.prev{right:10px;}
+    .music-btn.next{left:10px;}
+
+    @media(max-width:600px){
+      .music-slide img,
+      .music-slide video{height:240px;}
+    }
+
+    /* ===== Booking UI ===== */
+    .booking-box{
+      margin-top:14px;
+      padding:14px;
+      border:1px solid #ead8b7;
+      border-radius:16px;
+      background:#fffaf0;
+    }
+
+    .booking-grid{
+      display:grid;
+      gap:10px;
+      grid-template-columns:1fr;
+    }
+
+    .booking-grid .two{
+      display:grid;
+      gap:10px;
+      grid-template-columns:1fr auto;
+    }
+
+    .hours-title{
+      margin:8px 0 6px;
+      color:#6b4f2f;
+      font-weight:900;
+    }
+
+    .hours-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:8px;
+    }
+
+    @media(max-width:520px){
+      .hours-grid{grid-template-columns:repeat(3, 1fr);}
+    }
+
+    .hour-btn{
+      padding:10px 6px;
+      border-radius:12px;
+      font-weight:900;
+      border:2px solid transparent;
+      cursor:pointer;
+      background:#fff;
+      color:#3b2a18;
+    }
+
+    .hour-btn.available{
+      background:#dcfce7;
+      color:#166534;
+      border-color:#22c55e;
+    }
+
+    .hour-btn.selected{
+      background:#16a34a;
+      color:#fff;
+      border-color:#16a34a;
+    }
+
+    .hour-btn.full{
+      background:#fee2e2;
+      color:#991b1b;
+      border-color:#ef4444;
+      cursor:not-allowed;
+      opacity:.85;
+    }
+
+    .error{
+      margin:8px 0 0;
+      color:#b91c1c;
+      font-weight:900;
+      display:none;
+    }
+
+    .hint{
+      margin:10px 0 0;
+      color:#7a5a36;
+      font-size:14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <div class="container">
+    <div></div>
+    <div>
+      <a href="#about">عن المعهد</a>
+      <a href="#courses">دوراتنا</a>
+      <a href="#contact">تواصل</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <img src="logo1.png" alt="شعار روح الشرق">
+  <h1>روح الشرق</h1>
+  <p>معهد روح الشرق للرّقي عنوان</p>
+
+  <div class="bar">
+    <a class="btn primary" href="#courses">دوراتنا المميزة</a>
+    <a class="btn secondary" href="https://wa.me/972535934453" target="_blank">واتساب مباشر</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section id="about">
+    <h2>عن معهد روح الشرق</h2>
+    <p>
+      في معهد روح الشرق بالمغار، نقدّم برامج تعليمية شاملة للأطفال والشباب تشمل
+      اللغات، التقوية المدرسية، الموسيقى، والروبوتيكا، بأسلوب تعليمي حديث وتفاعلي.
+      تُقدَّم دوراتنا على يد نخبة من أفضل المدرّبين المتخصّصين، مع برامج مخصّصة
+      لجميع الأعمار وبأسعار مناسبة، ضمن بيئة آمنة ومحفّزة.
+    </p>
+  </section>
+
+  <section id="courses" class="courses-box">
+    <div class="courses-title">دوراتنا المميزة</div>
+
+    <div class="courses-grid">
+      <button class="course-pill" data-course="music">موسيقى</button>
+
+      <button class="course-pill light" data-title="الطبيب الصغير"
+        data-desc="ورشة ممتعة للأطفال للتعرّف على جسم الإنسان وأساسيات العناية الصحية بطريقة تفاعلية وآمنة.">
+        الطبيب الصغير
+      </button>
+
+      <button class="course-pill" data-title="إسعاف أولي"
+        data-desc="تدريب عملي على أساسيات الإسعاف الأولي والتعامل مع الحالات البسيطة بطريقة مفهومة للجميع.">
+        إسعاف أولي
+      </button>
+
+      <button class="course-pill light" data-title="اللغة الإنجليزية"
+        data-desc="تقوية محادثة + قواعد + قراءة وكتابة حسب المستوى. مجموعات صغيرة مع متابعة وتقييم دوري.">
+        اللغة الإنجليزية
+      </button>
+
+      <button class="course-pill" data-title="روبوتيكا"
+        data-desc="تعليم عملي: تفكير منطقي + برمجة + بناء روبوتات بطريقة ممتعة ومناسبة للأعمار المختلفة.">
+        روبوتيكا
+      </button>
+
+      <button class="course-pill light" data-title="اللغة العبرية"
+        data-desc="تعلم عبرية من الأساس أو تقوية للمدرسة: محادثة، قراءة، قواعد، وتدريب عملي حسب المستوى.">
+        اللغة العبرية
+      </button>
+
+      <button class="course-pill" data-title="رياضيات"
+        data-desc="تقوية رياضيات لكل المراحل: شرح مبسط + تدريب + تحضير للامتحانات ومتابعة مستمرة.">
+        رياضيات
+      </button>
+
+      <button class="course-pill light" data-title="علوم"
+        data-desc="شرح مواد العلوم بطريقة مبسطة مع تمارين وأساليب تفاعلية تناسب المرحلة والعمر.">
+        علوم
+      </button>
+
+      <button class="course-pill" data-title="فيزياء"
+        data-desc="تقوية فيزياء + حل أسئلة وامتحانات سابقة، مع تبسيط المفاهيم الصعبة.">
+        فيزياء
+      </button>
+
+      <button class="course-pill light" data-title="كيمياء"
+        data-desc="تقوية كيمياء بطريقة سهلة مع تمارين ومراجعات وتحضير للامتحانات.">
+        كيمياء
+      </button>
+
+      <button class="course-pill" data-title="اللغة العربية"
+        data-desc="قراءة، قواعد، تعبير، وإملاء، مع متابعة حسب مستوى الطالب وبأسلوب مشوّق.">
+        اللغة العربية
+      </button>
+
+      <button class="course-pill light" data-title="فنون"
+        data-desc="ورشات فنون وإبداع: رسم، أشغال يدوية، وتطوير المهارات الفنية بطريقة ممتعة.">
+        فنون
+      </button>
+
+      <button class="course-pill" data-title="موهوبين للثالث"
+        data-desc="برنامج تقوية وتطوير مهارات مخصص لطلاب الصف الثالث، مع نشاطات وتمارين مركزة.">
+        موهوبين للثالث
+      </button>
+
+      <button class="course-pill light" data-title="تعليم مصحّح"
+        data-desc="تقوية مهارات القراءة والكتابة مع أساليب تعليمية مصححة وداعمة للطلاب.">
+        تعليم مصحّح
+      </button>
+
+      <button class="course-pill" data-title="موهوبين للسادس"
+        data-desc="برنامج تقوية وتطوير مهارات لطلاب الصف السادس، مع متابعة وتمارين وتحضير للانتقال للمرحلة الإعدادية.">
+        موهوبين للسادس
+      </button>
+
+      <button class="course-pill light" data-title="ورشات تفاعلية تفريغية للأطفال"
+        data-desc="ورشات ترفيهية وتفاعلية تساعد الأطفال على التعبير والتفريغ بطريقة إيجابية ضمن جو آمن وممتع.">
+        ورشات تفاعلية تفريغية للأطفال
+      </button>
+
+      <button class="course-pill" data-title="مهارات الروضة والبستان"
+        data-desc="برنامج تأسيسي للأطفال لتقوية المهارات الأساسية (حروف، أرقام، تركيز، كتابة) بطريقة ممتعة.">
+        مهارات الروضة والبستان
+      </button>
+
+      <button class="course-pill light" data-title="دورة تحضيرية للصف الأول"
+        data-desc="تحضير شامل للصف الأول: حروف وأرقام، قراءة وكتابة، مهارات تركيز وثقة، مع تدريبات لطيفة.">
+        دورة تحضيرية للصف الأول
+      </button>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>تواصل معنا</h2>
+    <div class="contact">
+      <div>
+        <p><strong>📍 المكان:</strong> المغار</p>
+        <p><strong>📞 واتساب:</strong> 053-593-4453</p>
+        <p><strong>📷 انستغرام:</strong> mahahnoutt</p>
+
+        <a class="btn primary" href="https://wa.me/972535934453" target="_blank">
+          تواصل عبر واتساب
+        </a>
+      </div>
+
+      <form onsubmit="event.preventDefault(); alert('تم إرسال الرسالة 😊');">
+        <input placeholder="الاسم" required><br><br>
+        <input placeholder="رقم الهاتف" required><br><br>
+        <textarea rows="4" placeholder="رسالتك" required></textarea><br><br>
+        <button type="submit">إرسال</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> روح الشرق
+</footer>
+
+<!-- Popup -->
+<div class="modal-overlay" id="courseModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">عنوان</h3>
+    <p id="modalDesc"></p>
+
+    <!-- سلايدر الموسيقى -->
+    <div id="musicWrap" style="display:none;">
+      <div class="music-slider">
+        <div class="music-slides" id="musicSlides">
+          <div class="music-slide"><img src="music1.jpeg" alt=""></div>
+          <div class="music-slide"><img src="music2.jpeg" alt=""></div>
+
+          <div class="music-slide">
+            <video src="music8.mp4" controls playsinline></video>
+          </div>
+
+          <div class="music-slide"><img src="music3.jpeg" alt=""></div>
+
+          <div class="music-slide">
+            <video src="music6.mp4" controls playsinline></video>
+          </div>
+
+          <div class="music-slide"><img src="music4.jpeg" alt=""></div>
+          <div class="music-slide"><img src="music5.jpeg" alt=""></div>
+
+          <div class="music-slide">
+            <video src="music7.mp4" controls playsinline></video>
+          </div>
+        </div>
+
+        <button class="music-btn prev" id="musicPrev">›</button>
+        <button class="music-btn next" id="musicNext">‹</button>
+      </div>
+    </div>
+
+    <!-- ===== Booking ===== -->
+    <div class="booking-box">
+      <h3 style="margin:0 0 10px;color:#6b4f2f;">حجز درس</h3>
+
+      <form id="bookingForm">
+        <div class="booking-grid">
+          <input id="bkName" placeholder="اسم الطالب" required>
+          <input id="bkPhone" placeholder="رقم الهاتف" required>
+
+          <div class="booking-grid two">
+            <input id="bkDate" type="date" required>
+            <button type="button" class="modal-close" onclick="fillToday()">اليوم</button>
+          </div>
+
+          <div class="hours-title">اختاري الساعة</div>
+          <div class="hours-grid" id="hoursGrid"></div>
+
+          <div class="error" id="hourError">اختاري ساعة متاحة قبل الإرسال</div>
+
+          <textarea id="bkNotes" rows="3" placeholder="ملاحظات (اختياري)"></textarea>
+
+          <div class="modal-actions">
+            <button type="submit" class="modal-close" style="background:#c8743c;color:#fff;">
+              إرسال طلب الحجز على واتساب
+            </button>
+          </div>
+
+          <p class="hint">سيتم إرسال الطلب عبر واتساب لتأكيد الموعد.</p>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-actions">
+      <button class="modal-close" id="modalClose">إغلاق</button>
+      <a class="modal-whatsapp" id="modalWhatsApp" target="_blank" rel="noopener">
+        اسأل على واتساب
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const modal = document.getElementById("courseModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDesc = document.getElementById("modalDesc");
+  const modalClose = document.getElementById("modalClose");
+  const modalWhatsApp = document.getElementById("modalWhatsApp");
+
+  const musicWrap = document.getElementById("musicWrap");
+  const musicSlides = document.getElementById("musicSlides");
+  const musicPrev = document.getElementById("musicPrev");
+  const musicNext = document.getElementById("musicNext");
+  let musicCount = musicSlides.children.length;
+  let musicIndex = 0;
+  let musicTimer = null;
+
+  // ===== Booking refs =====
+  const bookingForm = document.getElementById("bookingForm");
+  const hourError = document.getElementById("hourError");
+  const hoursGrid = document.getElementById("hoursGrid");
+
+  let selectedCourseTitle = "";
+  let selectedHour = "";
+
+  // ✅ برنامج ساعات حسب "الدورة + اليوم"
+  // 0=الأحد .. 6=السبت
+  // full:true يعني ممتلئ / غير متاح
+  const hoursByCourse = {
+    "موسيقى": {
+      0: [ {time:"16:00", full:false}, {time:"17:00", full:true},  {time:"18:00", full:false} ],
+      1: [ {time:"15:00", full:false}, {time:"16:00", full:false}, {time:"19:00", full:false} ],
+      2: [ {time:"16:00", full:false}, {time:"17:00", full:false} ],
+      3: [ {time:"18:00", full:false}, {time:"19:00", full:true} ],
+      4: [ {time:"16:00", full:false}, {time:"17:00", full:false} ],
+      5: [ ],
+      6: [ {time:"10:00", full:false}, {time:"11:00", full:false} ]
+    },
+
+    "اللغة الإنجليزية": {
+      0: [ {time:"14:00", full:false}, {time:"15:00", full:false} ],
+      1: [ {time:"17:00", full:false}, {time:"18:00", full:false} ],
+      2: [ {time:"16:00", full:false}, {time:"18:00", full:true} ],
+      3: [ {time:"17:00", full:false} ],
+      4: [ {time:"16:00", full:false} ],
+      5: [ ],
+      6: [ ]
+    },
+
+    "اللغة العبرية": {
+      0: [ {time:"15:00", full:false}, {time:"16:00", full:false} ],
+      1: [ {time:"16:00", full:true},  {time:"18:00", full:false} ],
+      2: [ {time:"15:00", full:false} ],
+      3: [ {time:"16:00", full:false}, {time:"17:00", full:false} ],
+      4: [ {time:"18:00", full:false} ],
+      5: [ ],
+      6: [ ]
+    },
+
+    "رياضيات": {
+      0: [ {time:"14:00", full:false}, {time:"16:00", full:false} ],
+      1: [ {time:"15:00", full:false}, {time:"17:00", full:false} ],
+      2: [ {time:"16:00", full:true},  {time:"18:00", full:false} ],
+      3: [ {time:"15:00", full:false} ],
+      4: [ {time:"16:00", full:false}, {time:"17:00", full:true} ],
+      5: [ ],
+      6: [ ]
+    },
+
+    "علوم": {
+      0: [ {time:"17:00", full:false} ],
+      1: [ {time:"16:00", full:false} ],
+      2: [ {time:"17:00", full:false}, {time:"18:00", full:false} ],
+      3: [ ],
+      4: [ {time:"16:00", full:false} ],
+      5: [ ],
+      6: [ ]
+    },
+
+    "روبوتيكا": {
+      0: [ {time:"18:00", full:false} ],
+      1: [ {time:"18:00", full:false}, {time:"19:00", full:false} ],
+      2: [ ],
+      3: [ {time:"18:00", full:true}, {time:"19:00", full:false} ],
+      4: [ {time:"18:00", full:false} ],
+      5: [ ],
+      6: [ {time:"11:00", full:false} ]
+    },
+
+    // افتراضي لباقي الدورات (إذا ما حطّيتي جدول)
+    "_default": {
+      0: [ {time:"16:00", full:false}, {time:"17:00", full:false} ],
+      1: [ {time:"16:00", full:false} ],
+      2: [ {time:"16:00", full:false} ],
+      3: [ {time:"16:00", full:false} ],
+      4: [ {time:"16:00", full:false} ],
+      5: [ ],
+      6: [ ]
+    }
+  };
+
+  function fillToday(){
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,'0');
+    const dd = String(d.getDate()).padStart(2,'0');
+    const today = `${yyyy}-${mm}-${dd}`;
+
+    const dateInput = document.getElementById("bkDate");
+    dateInput.value = today;
+    renderHours(today);
+  }
+
+  function resetBooking(){
+    bookingForm.reset();
+    selectedHour = "";
+    hourError.style.display = "none";
+    hoursGrid.innerHTML = "";
+    fillToday();
+  }
+
+  function renderHours(dateValue){
+    hoursGrid.innerHTML = "";
+    selectedHour = "";
+    hourError.style.display = "none";
+
+    if(!dateValue) return;
+
+    const dayIndex = new Date(dateValue).getDay();
+
+    const courseTable = hoursByCourse[selectedCourseTitle] || hoursByCourse["_default"];
+    const hours = (courseTable && courseTable[dayIndex]) ? courseTable[dayIndex] : [];
+
+    if(hours.length === 0){
+      hoursGrid.innerHTML =
+        "<div style='grid-column:1/-1;color:#b91c1c;font-weight:900'>لا يوجد ساعات متاحة لهذا اليوم</div>";
+      return;
+    }
+
+    hours.forEach(h => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = h.time;
+
+      if(h.full){
+        btn.className = "hour-btn full";
+        btn.disabled = true;
+      }else{
+        btn.className = "hour-btn available";
+        btn.addEventListener("click", () => {
+          selectedHour = h.time;
+          hourError.style.display = "none";
+          document.querySelectorAll(".hour-btn").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+        });
+      }
+
+      hoursGrid.appendChild(btn);
+    });
+  }
+
+  document.getElementById("bkDate").addEventListener("change", (e) => {
+    renderHours(e.target.value);
+  });
+
+  // ===== Music slider logic =====
+  function stopAllVideos(){
+    document.querySelectorAll(".music-slide video").forEach(v => {
+      v.pause();
+      v.currentTime = 0;
+    });
+  }
+
+  function getCurrentVideo(){
+    const currentSlide = musicSlides.children[musicIndex];
+    return currentSlide ? currentSlide.querySelector("video") : null;
+  }
+
+  function stopMusicAuto(){
+    if(musicTimer){
+      clearInterval(musicTimer);
+      musicTimer = null;
+    }
+  }
+
+  function startMusicAuto(){
+    stopMusicAuto();
+    musicTimer = setInterval(() => {
+      if(getCurrentVideo()){
+        stopMusicAuto();
+        return;
+      }
+      musicGo(1);
+    }, 4500);
+  }
+
+  function renderMusic(){
+    musicSlides.style.transform = `translateX(${musicIndex * 100}%)`;
+  }
+
+  function attachVideoHandlers(){
+    document.querySelectorAll("#musicSlides video").forEach(v => {
+      if(v.dataset.bound === "1") return;
+      v.dataset.bound = "1";
+
+      v.addEventListener("ended", () => {
+        musicGo(1);
+        startMusicAuto();
+      });
+
+      v.addEventListener("play", () => {
+        stopMusicAuto();
+      });
+    });
+  }
+
+  function musicGo(step){
+    stopAllVideos();
+    musicIndex = (musicIndex + step + musicCount) % musicCount;
+    renderMusic();
+
+    if(getCurrentVideo()){
+      stopMusicAuto();
+    }
+  }
+
+  musicNext.addEventListener("click", () => musicGo(1));
+  musicPrev.addEventListener("click", () => musicGo(-1));
+
+  // ===== Modal open/close =====
+  function openModal(title, desc){
+    selectedCourseTitle = title;
+    resetBooking();
+
+    modalTitle.textContent = title;
+    modalDesc.style.display = "block";
+    modalDesc.textContent = desc || "";
+
+    musicWrap.style.display = "none";
+    stopMusicAuto();
+    stopAllVideos();
+
+    const msg = encodeURIComponent(`مرحبا، بدي تفاصيل عن دورة: ${title}`);
+    modalWhatsApp.href = `https://wa.me/972535934453?text=${msg}`;
+
+    modal.style.display = "flex";
+  }
+
+  function openMusicModal(){
+    selectedCourseTitle = "موسيقى";
+    resetBooking();
+
+    modalTitle.textContent = "دورات الموسيقى 🎻";
+    modalDesc.style.display = "block";
+    modalDesc.textContent = "أجواء من دورات الموسيقى والحفلات – تعليم كمان، بيانو، جيتار، تشيلو، درامز لجميع الأعمار.";
+
+    musicWrap.style.display = "block";
+    musicIndex = 0;
+    renderMusic();
+    attachVideoHandlers();
+    startMusicAuto();
+
+    const msg = encodeURIComponent("مرحبا، بدي تفاصيل عن دورات الموسيقى");
+    modalWhatsApp.href = `https://wa.me/972535934453?text=${msg}`;
+
+    modal.style.display = "flex";
+  }
+
+  function closeModal(){
+    modal.style.display = "none";
+    stopMusicAuto();
+    stopAllVideos();
+  }
+
+  modalClose.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", (e) => {
+    if(e.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeModal();
+  });
+
+  // ===== course clicks =====
+  document.querySelectorAll(".courses-grid .course-pill").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if(btn.dataset.course === "music"){
+        openMusicModal();
+        return;
+      }
+      const title = btn.getAttribute("data-title") || btn.textContent.trim();
+      const desc = btn.getAttribute("data-desc") || "قريبًا سيتم إضافة تفاصيل هذه الدورة.";
+      openModal(title, desc);
+    });
+  });
+
+  // ===== submit booking =====
+  bookingForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if(!selectedHour){
+      hourError.style.display = "block";
+      return;
+    }
+
+    const name = document.getElementById("bkName").value.trim();
+    const phone = document.getElementById("bkPhone").value.trim();
+    const date = document.getElementById("bkDate").value;
+    const notes = document.getElementById("bkNotes").value.trim();
+
+    let msg =
+`مرحبا 🌿
+بدي احجز درس في معهد روح الشرق
+
+📌 الدورة: ${selectedCourseTitle}
+👤 اسم الطالب: ${name}
+📞 رقم الهاتف: ${phone}
+📅 التاريخ: ${date}
+⏰ الساعة: ${selectedHour}`;
+
+    if(notes) msg += `\n📝 ملاحظات: ${notes}`;
+
+    const url = `https://wa.me/972535934453?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
+  });
+</script>
+
+</body>
+</html>
